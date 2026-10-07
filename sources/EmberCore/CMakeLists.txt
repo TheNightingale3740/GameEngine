@@ -14,7 +14,6 @@ add_library(EmberCore STATIC ${EMBER_CORE_SOURCES})
 target_include_directories(EmberCore
     PUBLIC
         "${CMAKE_CURRENT_SOURCE_DIR}/Source"
-        "${miniaudio_SOURCE_DIR}"
 )
 
 # Jolt's headers are included by exactly one engine translation unit, and their
@@ -22,6 +21,11 @@ target_include_directories(EmberCore
 # compiled with the engine's strict warning set and fail the build on code the
 # engine cannot change.
 target_include_directories(EmberCore SYSTEM PRIVATE "${jolt_SOURCE_DIR}")
+
+# miniaudio is a single header with its implementation compiled into one
+# translation unit. It is included as a system header for the same reason Jolt's
+# is: its warnings are its own, and the engine cannot fix them.
+target_include_directories(EmberCore SYSTEM PRIVATE "${miniaudio_SOURCE_DIR}")
 
 target_link_libraries(EmberCore
     PUBLIC
