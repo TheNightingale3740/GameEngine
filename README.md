@@ -34,13 +34,21 @@ The first configure downloads a few hundred megabytes; later ones are fast.
 ## A first project
 
 ```sh
-./build/bin/EmberEditor demo.cmd
+./build/bin/EmberEditor scripts/demo.cmd
 ./build/bin/EmberRuntime /tmp/emberdemo/dist
 ```
 
-`demo.cmd` builds a project, writes the scene that exercises every engine feature
-into it, runs it for two seconds and exports a shippable build. `EmberEditor`
-prints its full command list when run with no arguments.
+`scripts/demo.cmd` builds a project in `/tmp/emberdemo`, writes the scene that
+exercises every engine feature into it, runs it for two seconds and exports a
+shippable build to `/tmp/emberdemo/dist`. `EmberEditor` prints its full command
+list when run with no arguments.
+
+`EmberRuntime` takes the build directory, then optionally a frame count and the
+seconds each frame advances:
+
+```sh
+./build/bin/EmberRuntime /tmp/emberdemo/dist 300 0.016
+```
 
 ## Layout
 
