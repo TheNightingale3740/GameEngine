@@ -19,6 +19,7 @@ set(EMBER_TEST_SUITES
     Scene
     Audio
     Renderer
+    Engine
 )
 
 foreach(suite IN LISTS EMBER_TEST_SUITES)

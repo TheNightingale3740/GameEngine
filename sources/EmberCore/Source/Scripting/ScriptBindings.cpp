@@ -620,6 +620,11 @@ namespace Ember
         }
 
         /// Registers a table of C functions under `name` as a global.
+        ///
+        /// The tables are capitalised to follow Lua's own convention for library
+        /// tables, and because a script's entry points take parameters named after
+        /// them: a script that calls its parameter `entity` would otherwise shadow
+        /// the table it is trying to call.
         void RegisterTable(lua_State* state, const char* name, const luaL_Reg* functions)
         {
             lua_newtable(state);
@@ -678,11 +683,11 @@ namespace Ember
             {nullptr, nullptr}
         };
 
-        RegisterTable(state, "log", logFunctions);
-        RegisterTable(state, "time", timeFunctions);
-        RegisterTable(state, "entity", entityFunctions);
-        RegisterTable(state, "component", componentFunctions);
-        RegisterTable(state, "math", mathFunctions);
+        RegisterTable(state, "Log", logFunctions);
+        RegisterTable(state, "Time", timeFunctions);
+        RegisterTable(state, "Entity", entityFunctions);
+        RegisterTable(state, "Component", componentFunctions);
+        RegisterTable(state, "Math", mathFunctions);
     }
 
     void ScriptEngine::PushEntity(Entity entity)

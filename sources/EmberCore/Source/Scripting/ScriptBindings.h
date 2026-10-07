@@ -20,32 +20,36 @@ namespace Ember
     ///
     /// Defines:
     ///
-    ///   log.info(...)            writes an info-level log line
-    ///   log.warn(...)            writes a warning
-    ///   log.error(...)           writes an error
+    ///   Log.info(...)            writes an info-level log line
+    ///   Log.warn(...)            writes a warning
+    ///   Log.error(...)           writes an error
     ///
-    ///   time.now()               seconds since the engine started
-    ///   time.delta()             seconds since the previous frame
+    ///   Time.now()               seconds since the engine started
+    ///   Time.delta()             seconds since the previous frame
     ///
-    ///   entity.is_valid(e)       whether a handle refers to a live entity
-    ///   entity.name(e)           the entity's name
-    ///   entity.set_name(e, name)
-    ///   entity.destroy(e)        destroys an entity and its subtree
-    ///   entity.children(e)       array of child handles
-    ///   entity.parent(e)         parent handle, or nil
-    ///   entity.set_parent(child, parent)
-    ///   entity.create(name)      creates an entity, returning its handle
+    ///   Entity.is_valid(e)       whether a handle refers to a live entity
+    ///   Entity.name(e)           the entity's name
+    ///   Entity.set_name(e, name)
+    ///   Entity.destroy(e)        destroys an entity and its subtree
+    ///   Entity.children(e)       array of child handles
+    ///   Entity.parent(e)         parent handle, or nil
+    ///   Entity.set_parent(child, parent)
+    ///   Entity.create(name)      creates an entity, returning its handle
     ///
-    ///   component.has(e, name)   whether the entity has that component
-    ///   component.get(e, name)   the component as a table, or nil
-    ///   component.set(e, name, table)
-    ///   component.remove(e, name)
-    ///   component.types(e)       array of component names on the entity
+    ///   Component.has(e, name)   whether the entity has that component
+    ///   Component.get(e, name)   the component as a table, or nil
+    ///   Component.set(e, name, table)
+    ///   Component.remove(e, name)
+    ///   Component.types(e)       array of component names on the entity
     ///
-    ///   math.vec3(x, y, z)      a table with x, y, z
-    ///   math.quat(x, y, z, w)    a table with x, y, z, w
-    ///   math.length(x, y, z)     length of a vector
-    ///   math.normalize(x, y, z)  a unit vector
+    ///   Math.vec3(x, y, z)       a table with x, y, z
+    ///   Math.quat(x, y, z, w)    a table with x, y, z, w
+    ///   Math.length(x, y, z)     length of a vector
+    ///   Math.normalize(x, y, z)  a unit vector
+    ///
+    /// The tables are capitalised, as Lua's own library tables are. A script's
+    /// entry points take parameters named after them, and a script whose parameter
+    /// is called `entity` would shadow the table it is trying to call.
     ///
     /// A component table uses the field names from the component's registration,
     /// with vectors as `{x=, y=, z=}` tables and enums as their string names.
