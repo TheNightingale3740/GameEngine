@@ -63,4 +63,4 @@ the bugs that have already been made here, and what is not implemented yet.
 
 ## Licence
 
-To be decided.
+MIT. See [LICENSE](LICENSE).
