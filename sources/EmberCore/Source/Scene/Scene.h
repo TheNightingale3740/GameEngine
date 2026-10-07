@@ -130,12 +130,10 @@ namespace Ember
         std::vector<std::string> m_RootIds;
     };
 
-    /// A prefab: a scene whose entities are instantiated into another world.
+    /// Prefabs are scenes with `kind` set to "prefab".
     ///
-    /// A prefab is a scene file with `kind` set to "prefab". Both are loaded and
-    /// saved by the same code, which is what keeps the two formats from drifting.
-    using Prefab = Scene;
-
+    /// There is deliberately no separate prefab type: both are loaded and saved by
+    /// the same code, which is what keeps the two formats from drifting apart.
     namespace PrefabFormat
     {
         /// Writes a prefab file from a world holding exactly one root entity.

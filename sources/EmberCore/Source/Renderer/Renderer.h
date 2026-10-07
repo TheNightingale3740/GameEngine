@@ -98,16 +98,15 @@ namespace Ember
         std::uint32_t MaterialId = 0;
         Mat4 Transform = Mat4(1.0f);
 
-        /// First primitive to draw and how many, for a mesh drawn in part.
-        std::uint32_t FirstPrimitive = 0;
-        std::uint32_t PrimitiveCount = 0;
+        /// Range of the mesh's index buffer to draw, for a mesh drawn in part.
+        std::uint32_t FirstIndex = 0;
+        std::uint32_t IndexCount = 0;
 
         /// Distance from the camera to the item's centre, used for sorting.
         float Depth = 0.0f;
 
         CullMode Cull = CullMode::Back;
         bool DoubleSided = false;
-        bool CastsShadow = true;
     };
 
     /// A light's contribution to the frame, as the renderer needs it.

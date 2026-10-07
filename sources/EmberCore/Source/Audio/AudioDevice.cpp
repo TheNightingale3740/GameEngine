@@ -28,55 +28,6 @@ namespace Ember
         AudioDevice* s_ActiveAudioDevice = nullptr;
     }
 
-    std::size_t GetChannelCount(AudioFormat format) noexcept
-    {
-        switch (format)
-        {
-            case AudioFormat::Mono8:
-            case AudioFormat::Mono16:
-            case AudioFormat::MonoFloat:
-                return 1;
-
-            case AudioFormat::Stereo8:
-            case AudioFormat::Stereo16:
-            case AudioFormat::StereoFloat:
-                return 2;
-
-            case AudioFormat::Unknown:
-                break;
-        }
-
-        return 0;
-    }
-
-    std::size_t GetBytesPerSample(AudioFormat format) noexcept
-    {
-        switch (format)
-        {
-            case AudioFormat::Mono8:
-            case AudioFormat::Stereo8:
-                return 1;
-
-            case AudioFormat::Mono16:
-            case AudioFormat::Stereo16:
-                return 2;
-
-            case AudioFormat::MonoFloat:
-            case AudioFormat::StereoFloat:
-                return 4;
-
-            case AudioFormat::Unknown:
-                break;
-        }
-
-        return 0;
-    }
-
-    std::size_t GetBytesPerFrame(AudioFormat format) noexcept
-    {
-        return GetChannelCount(format) * GetBytesPerSample(format);
-    }
-
     AudioDevice* GetActiveAudioDevice() noexcept
     {
         return s_ActiveAudioDevice;

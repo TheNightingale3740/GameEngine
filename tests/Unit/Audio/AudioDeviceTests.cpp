@@ -119,24 +119,6 @@ TEST(AudioDeviceTest, ActiveDeviceIsExposed)
     EXPECT_EQ(GetActiveAudioDevice(), &fixture.Get());
 }
 
-// ---------------------------------------------------------------------- formats
-
-TEST(AudioFormatTest, ChannelCounts)
-{
-    EXPECT_EQ(GetChannelCount(AudioFormat::Mono8), 1u);
-    EXPECT_EQ(GetChannelCount(AudioFormat::Stereo8), 2u);
-    EXPECT_EQ(GetChannelCount(AudioFormat::Unknown), 0u);
-}
-
-TEST(AudioFormatTest, FrameSizes)
-{
-    EXPECT_EQ(GetBytesPerFrame(AudioFormat::Mono8), 1u);
-    EXPECT_EQ(GetBytesPerFrame(AudioFormat::Mono16), 2u);
-    EXPECT_EQ(GetBytesPerFrame(AudioFormat::Stereo16), 4u);
-    EXPECT_EQ(GetBytesPerFrame(AudioFormat::StereoFloat), 8u);
-    EXPECT_EQ(GetBytesPerFrame(AudioFormat::Unknown), 0u);
-}
-
 // ----------------------------------------------------------------------- sounds
 
 TEST(SoundTest, CreateSoundStoresFrames)

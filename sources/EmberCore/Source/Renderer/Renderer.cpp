@@ -265,6 +265,11 @@ namespace Ember
             item.Transform = transform != nullptr ? transform->ToMatrix() : Mat4(1.0f);
             item.DoubleSided = mesh.DoubleSided;
             item.Cull = mesh.DoubleSided ? CullMode::None : CullMode::Back;
+            item.FirstIndex = mesh.FirstIndex;
+
+            // A count of zero means the whole mesh, which is what the component's
+            // default says and what an authoring tool leaves behind.
+            item.IndexCount = mesh.IndexCount;
 
             candidates.push_back(item);
         });
@@ -315,10 +320,12 @@ namespace Ember
             item.Depth = glm::distance(centre, camera.Position);
             m_DrawItems.push_back(item);
 
-            if (item.CastsShadow)
-            {
-                m_ShadowCasters.push_back(item);
-            }
+            // Everything the camera can see can also block light, so the shadow
+            // pass draws the same set. A per-mesh opt-out would need a component
+            // field for it, and a mesh that casts no shadow is rare enough that
+            // the usual reason to want one is a transparent surface, which is not
+            // in this list anyway.
+            m_ShadowCasters.push_back(item);
 
             if (knownBounds)
             {

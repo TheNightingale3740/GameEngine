@@ -481,6 +481,55 @@ TEST(RenderQueueTest, MeshesWithoutKnownBoundsAreNotCulled)
     EXPECT_EQ(queue.GetDrawItems().size(), 1u);
 }
 
+TEST(RenderQueueTest, TheQueueCarriesTheMeshesIndexRange)
+{
+    World world;
+    RenderQueue queue;
+
+    const Entity entity = world.CreateEntity();
+    world.AddComponent(entity, TransformComponent{});
+
+    MeshComponent mesh;
+    mesh.MeshId = 1;
+    mesh.FirstIndex = 6;
+    mesh.IndexCount = 12;
+    world.AddComponent(entity, mesh);
+
+    queue.Build(world, DefaultCamera());
+
+    ASSERT_EQ(queue.GetDrawItems().size(), 1u);
+    EXPECT_EQ(queue.GetDrawItems()[0].FirstIndex, 6u);
+    EXPECT_EQ(queue.GetDrawItems()[0].IndexCount, 12u);
+}
+
+TEST(RenderQueueTest, AZeroIndexCountMeansTheWholeMesh)
+{
+    World world;
+    RenderQueue queue;
+
+    const Entity entity = world.CreateEntity();
+    world.AddComponent(entity, TransformComponent{});
+    world.AddComponent(entity, MeshComponent{});
+
+    queue.Build(world, DefaultCamera());
+
+    ASSERT_EQ(queue.GetDrawItems().size(), 1u);
+    EXPECT_EQ(queue.GetDrawItems()[0].IndexCount, 0u);
+}
+
+TEST(RenderQueueTest, ShadowCastersMatchTheDrawList)
+{
+    World world;
+    RenderQueue queue;
+
+    AddMesh(world, queue, Vec3(0.0f));
+    AddMesh(world, queue, Vec3(2.0f));
+
+    queue.Build(world, DefaultCamera());
+
+    EXPECT_EQ(queue.GetShadowCasters().size(), queue.GetDrawItems().size());
+}
+
 TEST(RenderQueueTest, TheQueueCarriesEachEntitysTransform)
 {
     World world;

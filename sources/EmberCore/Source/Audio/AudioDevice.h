@@ -26,31 +26,12 @@
 
 namespace Ember
 {
-    /// Audio formats the engine can hold.
-    enum class AudioFormat
-    {
-        Unknown,
-        Mono8,
-        Mono16,
-        Stereo8,
-        Stereo16,
-        MonoFloat,
-        StereoFloat
-    };
-
-    /// Channels an audio format carries.
-    [[nodiscard]] std::size_t GetChannelCount(AudioFormat format) noexcept;
-
-    /// Bytes one sample of a format occupies.
-    [[nodiscard]] std::size_t GetBytesPerSample(AudioFormat format) noexcept;
-
-    /// Bytes one frame of a format occupies, across all of its channels.
-    [[nodiscard]] std::size_t GetBytesPerFrame(AudioFormat format) noexcept;
-
     /// Decoded sound data, ready to play.
     ///
-    /// Frames are always float samples after decoding, whatever the file's own
-    /// format was, so that mixing never has to convert.
+    /// Frames are always interleaved float samples after decoding, whatever the
+    /// file's own format was. A narrower source format would be widened once at
+    /// import and then converted again on every play, and the second conversion
+    /// is the one that loses precision.
     class Sound
     {
     public:
