@@ -18,6 +18,7 @@ set(EMBER_TEST_SUITES
     Physics
     Scene
     Audio
+    Renderer
 )
 
 foreach(suite IN LISTS EMBER_TEST_SUITES)
