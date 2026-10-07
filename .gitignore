@@ -1,0 +1,21 @@
+# Build output
+/build/
+/build-*/
+/out/
+/cmake-build-*/
+
+# Editor and IDE state
+/.vs/
+/.vscode/
+/.idea/
+*.user
+compile_commands.json
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Test and coverage output
+Testing/
+*.gcda
+*.gcno
