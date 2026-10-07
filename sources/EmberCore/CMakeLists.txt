@@ -17,6 +17,12 @@ target_include_directories(EmberCore
         "${miniaudio_SOURCE_DIR}"
 )
 
+# Jolt's headers are included by exactly one engine translation unit, and their
+# warnings are its own business rather than the engine's: without this they are
+# compiled with the engine's strict warning set and fail the build on code the
+# engine cannot change.
+target_include_directories(EmberCore SYSTEM PRIVATE "${jolt_SOURCE_DIR}")
+
 target_link_libraries(EmberCore
     PUBLIC
         glm::glm
